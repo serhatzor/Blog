@@ -5,7 +5,7 @@ namespace Blog.Interfaces.Comment
 {
     public class Comment : BaseEntity
     {
-        Guid PostId { get; set; }
-        string Text { get; set; }
+        public Guid PostId { get; set; }
+        public string Text { get; set; }
     }
 }

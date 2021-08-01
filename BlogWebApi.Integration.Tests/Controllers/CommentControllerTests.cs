@@ -1,4 +1,4 @@
-﻿using Blog.Interfaces.Category;
+﻿using Blog.Interfaces.Comment;
 using BlogWebApi.Integration.Tests.Base;
 using BlogWebApi.Integration.Tests.Controllers.FakeServices;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -8,21 +8,21 @@ using Xunit;
 
 namespace BlogWebApi.Integration.Tests.Controllers
 {
-    public partial class CategoryControllerTests :
-        BaseControllerTests<Category, ICategoryService, FakeCategoryService>,
+    public partial class CommentControllerTests :
+        BaseControllerTests<Comment, ICommentService, FakeCommentService>,
         IClassFixture<WebApplicationFactory<Startup>>
     {
-        public CategoryControllerTests(WebApplicationFactory<Startup> webApplicationFactory) : base(webApplicationFactory, "category", FakeCategoryService.Categories)
+        public CommentControllerTests(WebApplicationFactory<Startup> webApplicationFactory) : base(webApplicationFactory, "comment", FakeCommentService.Comments)
         {
         }
 
-        public override Category CreateNewEntity()
+        public override Comment CreateNewEntity()
         {
-            return new Category()
+            return new Comment()
             {
                 Id = Guid.NewGuid(),
-                NameResourceKey = $"testnameresourcekeynewentity",
-                DescriptionResourceKey = $"testdescriptionresourcekeynewentity"
+                PostId = Guid.NewGuid(),
+                Text = $"textcommentnewentity"
             };
         }
 
@@ -31,14 +31,14 @@ namespace BlogWebApi.Integration.Tests.Controllers
             return @"
             [
                 {
-                    NameResourceKey = `testnameresourcekeynewentity`
-                    DescriptionResourceKey = `testdescriptionresourcekeynewentity`
-                    Id = guid-0
+                    PostId = guid-0
+                    Text = `testtextfake`
+                    Id = guid-1
                 },
                 {
-                    NameResourceKey = `testnameresourcekeynewentity`
-                    DescriptionResourceKey = `testdescriptionresourcekeynewentity`
-                    Id = guid-1
+                    PostId = guid-2
+                    Text = `textcommentnewentity`
+                    Id = guid-3
                 }
             ]";
         }
@@ -47,9 +47,9 @@ namespace BlogWebApi.Integration.Tests.Controllers
         {
             return @"
             {
-                NameResourceKey = `test2fake`
-                DescriptionResourceKey = `test2fake`
-                Id = guid-0
+                PostId = guid-0
+                Text = `testtextfake`
+                Id = guid-1
             }";
         }
 
@@ -57,9 +57,9 @@ namespace BlogWebApi.Integration.Tests.Controllers
         {
             return @"
             {
-                NameResourceKey = `testnameresourcekeynewentity`
-                DescriptionResourceKey = `testdescriptionresourcekeynewentity`
-                Id = guid-0
+                PostId = guid-0
+                Text = `textcommentnewentity`
+                Id = guid-1
             }";
         }
 
@@ -67,11 +67,12 @@ namespace BlogWebApi.Integration.Tests.Controllers
         {
             return @"
             {
-                NameResourceKey = `testnameresourcekeynewentity`
-                DescriptionResourceKey = `testdescriptionresourcekeynewentity`
-                Id = guid-0
+                PostId = guid-0
+                Text = `textcommentnewentity`
+                Id = guid-1
             }";
         }
+
 
         [Fact]
         public override async Task GetAllTest()
@@ -102,5 +103,6 @@ namespace BlogWebApi.Integration.Tests.Controllers
         {
             await base.RemoveTest();
         }
+
     }
 }

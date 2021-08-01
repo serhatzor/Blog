@@ -5,6 +5,6 @@ namespace Blog.Interfaces.Post
 {
     public class Post : BaseEntity
     {
-        Guid CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
     }
 }

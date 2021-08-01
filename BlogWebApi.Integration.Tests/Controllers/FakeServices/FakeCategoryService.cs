@@ -13,14 +13,14 @@ namespace BlogWebApi.Integration.Tests.Controllers.FakeServices
                 new Category()
                 {
                     Id = Guid.NewGuid(),
-                    NameResourceKey = "test1",
-                    DescriptionResourceKey = "test1"
+                    NameResourceKey = "test1fake",
+                    DescriptionResourceKey = "test1fake"
                 },
                 new Category()
                 {
                     Id = Guid.NewGuid(),
-                    NameResourceKey = "test2",
-                    DescriptionResourceKey = "test2"
+                    NameResourceKey = "test2fake",
+                    DescriptionResourceKey = "test2fake"
                 }
             };
 

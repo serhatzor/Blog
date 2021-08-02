@@ -1,0 +1,5 @@
+﻿{
+    PostId = guid-0
+    Text = `textcommentnewentity`
+    Id = guid-1
+}

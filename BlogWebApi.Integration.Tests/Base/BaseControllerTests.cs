@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using ReassureTest;
 using FluentAssertions;
 using System.Net.Http.Json;
+using System.IO;
 
 namespace BlogWebApi.Integration.Tests.Base
 {
@@ -22,11 +23,13 @@ namespace BlogWebApi.Integration.Tests.Base
         private readonly HttpClient httpClient;
         private readonly string apiRoute;
         private readonly List<E> rootEntities;
+        private readonly string expectedValueFilePrefix;
 
         public BaseControllerTests(WebApplicationFactory<Startup> webApplicationFactory, string apiRoute, List<E> rootEntities)
         {
             this.webApplicationFactory = webApplicationFactory;
             this.apiRoute = $"/api/{apiRoute}";
+            this.expectedValueFilePrefix = apiRoute;
             this.rootEntities = rootEntities;
 
             this.webApplicationFactory.Server.BaseAddress = new Uri("http://localhost/");
@@ -41,10 +44,6 @@ namespace BlogWebApi.Integration.Tests.Base
         }
 
         public abstract E CreateNewEntity();
-        public abstract string GetIsStringForGetAll();
-        public abstract string GetIsStringForGetById();
-        public abstract string GetIsStringForPost();
-        public abstract string GetIsStringForUpdate();
 
         private async Task<string> GetAsync(string apiRoute)
         {
@@ -67,7 +66,7 @@ namespace BlogWebApi.Integration.Tests.Base
             #endregion
 
             #region ReassureTest 
-            actualEntites.Is(GetIsStringForGetAll());
+            actualEntites.Is(new FileInfo($"Files\\{expectedValueFilePrefix}_getall.txt"));
             #endregion
         }
 
@@ -84,7 +83,7 @@ namespace BlogWebApi.Integration.Tests.Base
             #endregion
 
             #region ReassureTest 
-            actualEntity.Is(GetIsStringForGetById());
+            actualEntity.Is(new FileInfo($"Files\\{expectedValueFilePrefix}_getbyid.txt"));
             #endregion
         }
 
@@ -110,17 +109,17 @@ namespace BlogWebApi.Integration.Tests.Base
             #endregion
 
             #region ReassureTest
-            addedEntity.Is(GetIsStringForPost());
+            addedEntity.Is(new FileInfo($"Files\\{expectedValueFilePrefix}_post.txt"));
             #endregion
         }
 
         public virtual async Task UpdateTest()
         {
-            E firstEntity = rootEntities[0];
+            E lastEntity = rootEntities[rootEntities.Count-1];
 
             E updatedEntity = CreateNewEntity();
 
-            updatedEntity.Id = firstEntity.Id;
+            updatedEntity.Id = lastEntity.Id;
 
             HttpResponseMessage response = await this.httpClient.PutAsJsonAsync(apiRoute, updatedEntity);
 
@@ -139,15 +138,15 @@ namespace BlogWebApi.Integration.Tests.Base
             #endregion
 
             #region ReassureTest
-            actualEntity.Is(GetIsStringForUpdate());
+            actualEntity.Is(new FileInfo($"Files\\{expectedValueFilePrefix}_update.txt"));
             #endregion
         }
 
         public virtual async Task RemoveTest()
         {
-            E firstEntity = rootEntities[0];
+            E lastEntity = rootEntities[rootEntities.Count - 1];
 
-            HttpResponseMessage response = await this.httpClient.DeleteAsync($"{apiRoute}/{firstEntity.Id}");
+            HttpResponseMessage response = await this.httpClient.DeleteAsync($"{apiRoute}/{lastEntity.Id}");
 
             response.EnsureSuccessStatusCode();
 
@@ -155,7 +154,7 @@ namespace BlogWebApi.Integration.Tests.Base
 
             responseJson.ToLower().Should().Be(bool.TrueString.ToLower());
 
-            string getResponseJson = await GetAsync($"{apiRoute}/{firstEntity.Id}");
+            string getResponseJson = await GetAsync($"{apiRoute}/{lastEntity.Id}");
 
             E actualEntity = JsonConvert.DeserializeObject<E>(getResponseJson);
 

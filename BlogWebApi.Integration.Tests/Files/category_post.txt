@@ -1,0 +1,5 @@
+﻿{
+	NameResourceKey = `testnameresourcekeynewentity`
+	DescriptionResourceKey = `testdescriptionresourcekeynewentity`
+	Id = guid-0
+}

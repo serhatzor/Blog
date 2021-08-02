@@ -1,0 +1,4 @@
+﻿{
+    CategoryId = guid-0
+    Id = guid-1
+}

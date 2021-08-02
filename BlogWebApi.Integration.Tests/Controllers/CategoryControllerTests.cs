@@ -26,53 +26,6 @@ namespace BlogWebApi.Integration.Tests.Controllers
             };
         }
 
-        public override string GetIsStringForGetAll()
-        {
-            return @"
-            [
-                {
-                    NameResourceKey = `testnameresourcekeynewentity`
-                    DescriptionResourceKey = `testdescriptionresourcekeynewentity`
-                    Id = guid-0
-                },
-                {
-                    NameResourceKey = `testnameresourcekeynewentity`
-                    DescriptionResourceKey = `testdescriptionresourcekeynewentity`
-                    Id = guid-1
-                }
-            ]";
-        }
-
-        public override string GetIsStringForGetById()
-        {
-            return @"
-            {
-                NameResourceKey = `test2fake`
-                DescriptionResourceKey = `test2fake`
-                Id = guid-0
-            }";
-        }
-
-        public override string GetIsStringForPost()
-        {
-            return @"
-            {
-                NameResourceKey = `testnameresourcekeynewentity`
-                DescriptionResourceKey = `testdescriptionresourcekeynewentity`
-                Id = guid-0
-            }";
-        }
-
-        public override string GetIsStringForUpdate()
-        {
-            return @"
-            {
-                NameResourceKey = `testnameresourcekeynewentity`
-                DescriptionResourceKey = `testdescriptionresourcekeynewentity`
-                Id = guid-0
-            }";
-        }
-
         [Fact]
         public override async Task GetAllTest()
         {

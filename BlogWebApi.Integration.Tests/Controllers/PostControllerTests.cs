@@ -25,44 +25,6 @@ namespace BlogWebApi.Integration.Tests.Controllers
             };
         }
 
-        public override string GetIsStringForGetAll()
-        {
-            return @"
-            [
-                {
-                    CategoryId = guid-0
-                    Id = guid-1
-                }
-            ]";
-        }
-
-        public override string GetIsStringForGetById()
-        {
-            return @"
-            {
-                CategoryId = guid-0
-                Id = guid-1
-            }";
-        }
-
-        public override string GetIsStringForPost()
-        {
-            return @"
-            {
-                CategoryId = guid-0
-                Id = guid-1
-            }";
-        }
-
-        public override string GetIsStringForUpdate()
-        {
-            return @"
-            {
-                CategoryId = guid-0
-                Id = guid-1
-            }";
-        }
-
         [Fact]
         public override async Task GetAllTest()
         {

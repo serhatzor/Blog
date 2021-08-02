@@ -26,54 +26,6 @@ namespace BlogWebApi.Integration.Tests.Controllers
             };
         }
 
-        public override string GetIsStringForGetAll()
-        {
-            return @"
-            [
-                {
-                    PostId = guid-0
-                    Text = `testtextfake`
-                    Id = guid-1
-                },
-                {
-                    PostId = guid-2
-                    Text = `textcommentnewentity`
-                    Id = guid-3
-                }
-            ]";
-        }
-
-        public override string GetIsStringForGetById()
-        {
-            return @"
-            {
-                PostId = guid-0
-                Text = `testtextfake`
-                Id = guid-1
-            }";
-        }
-
-        public override string GetIsStringForPost()
-        {
-            return @"
-            {
-                PostId = guid-0
-                Text = `textcommentnewentity`
-                Id = guid-1
-            }";
-        }
-
-        public override string GetIsStringForUpdate()
-        {
-            return @"
-            {
-                PostId = guid-0
-                Text = `textcommentnewentity`
-                Id = guid-1
-            }";
-        }
-
-
         [Fact]
         public override async Task GetAllTest()
         {

@@ -1,0 +1,12 @@
+﻿[
+    {
+        PostId = guid-0
+        Text = `testtextfake`
+        Id = guid-1
+    },
+    {
+        PostId = guid-2
+        Text = `textcommentnewentity`
+        Id = guid-3
+    }
+]

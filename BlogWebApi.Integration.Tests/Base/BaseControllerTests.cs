@@ -66,7 +66,7 @@ namespace BlogWebApi.Integration.Tests.Base
             #endregion
 
             #region ReassureTest 
-            actualEntites.Is(new FileInfo($"Files\\{expectedValueFilePrefix}_getall.txt"));
+            actualEntites.Is(File.ReadAllText($"Files\\{expectedValueFilePrefix}_getall.txt"));
             #endregion
         }
 
@@ -83,7 +83,7 @@ namespace BlogWebApi.Integration.Tests.Base
             #endregion
 
             #region ReassureTest 
-            actualEntity.Is(new FileInfo($"Files\\{expectedValueFilePrefix}_getbyid.txt"));
+            actualEntity.Is(File.ReadAllText($"Files\\{expectedValueFilePrefix}_getbyid.txt"));
             #endregion
         }
 
@@ -109,7 +109,7 @@ namespace BlogWebApi.Integration.Tests.Base
             #endregion
 
             #region ReassureTest
-            addedEntity.Is(new FileInfo($"Files\\{expectedValueFilePrefix}_post.txt"));
+            addedEntity.Is(File.ReadAllText($"Files\\{expectedValueFilePrefix}_post.txt"));
             #endregion
         }
 
@@ -138,7 +138,7 @@ namespace BlogWebApi.Integration.Tests.Base
             #endregion
 
             #region ReassureTest
-            actualEntity.Is(new FileInfo($"Files\\{expectedValueFilePrefix}_update.txt"));
+            actualEntity.Is(File.ReadAllText($"Files\\{expectedValueFilePrefix}_update.txt"));
             #endregion
         }
 
